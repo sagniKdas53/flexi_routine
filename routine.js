@@ -1,47 +1,38 @@
-// Import stylesheets
-import "./style.css";
-
-// Write Javascript code!
-var one = document.getElementById("9am");
-var two = document.getElementById("10am");
-var three = document.getElementById("12am");
-var four = document.getElementById("break");
-var five = document.getElementById("1pm");
-var six = document.getElementById("3pm");
-var change = document.getElementById("time");
-
 function timer() {
-  var d = new Date();
-  var h = d.getHours();
-  var m = d.getMinutes();
-  console.log(h + ":" + m);
-  change.innerHTML = h + ":" + m;
-
+  let d = new Date();
+  let h = d.getHours();
+  let m = d.getMinutes();
+  let s = d.getSeconds();
+  console.log(h + ":" + m + ":" + s);
+  document.getElementById("time").innerHTML = h + ":" + m + ":" + s;
   if ((h === 9 && m >= 30) || (h === 10 && m <= 30)) {
-    one.style.background = "red";
+    document.getElementById("one").classList.add("table-warning");
   }
   if ((h === 10 && m >= 40) || (h === 11 && m <= 40)) {
-    two.style.background = "red";
+    document.getElementById("two").classList.add("table-warning");
+    document.getElementById("one").classList.remove("table-warning");
   }
   if ((h === 11 && m >= 50) || (h === 12 && m <= 50)) {
-    three.style.background = "red";
+    document.getElementById("three").classList.add("table-warning");
+    document.getElementById("two").classList.remove("table-warning");
   }
   if ((h === 12 && m > 50) || (h === 13 && m <= 50)) {
-    four.style.background = "red";
+    document.getElementById("four").classList.add("table-warning");
+    document.getElementById("three").classList.remove("table-warning");
   }
   if ((h === 13 && m > 50) || (h === 14 && m <= 50)) {
-    five.style.background = "red";
+    document.getElementById("five").classList.add("table-warning");
+    document.getElementById("four").classList.remove("table-warning");
   }
   if ((h === 15 && m >= 0) || (h === 16 && m <= 0)) {
-    six.style.background = "red";
+    document.getElementById("six").classList.add("table-warning");
+    document.getElementById("five").classList.remove("table-warning");
   }
-  //if (h === 1 && m >= 40) {
-  // one.style.background = "red";
-  //}
-  //if (h === 1 && m <= 30) {
-  //  one.style.background = "blue";
-  //}
+  if (h > 16) {
+    if (document.getElementById("six").classList.contains("table-warning")) {
+      document.getElementById("six").classList.remove("table-warning");
+    }
+  }
 }
-
 setTimeout(timer, 100);
-setInterval(timer, 300000);
+setInterval(timer, 1000);
